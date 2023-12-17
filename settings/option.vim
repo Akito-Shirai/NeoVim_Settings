@@ -1,21 +1,3 @@
-" ######################### VISUAL #########################
-set termguicolors	"True Color"
-set title
-set number
-set wrap
-set showmatch "()"
-set list "不可視文字(改行記号など)の可視化
-set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲ " デフォルト不可視文字をUnicodeできれいに
-set matchtime=3	"対応()のハイライト表示を3sにする"
-set cursorline "カーソル行の色付け"
-set noerrorbells
-set visualbell t_vb=
-set laststatus=2
-set statusline=%<(%{expand('%:p:h')}/%{expand('%:p:t')})\ %M%M%M%r%w%h\ \ %=\ ENC[%{&fenc!=''?&fenc:&enc}]\ FMT[%{&ff}]\ [%v][%l/%L][%p%%]
-"set background=dark
-
-
-
 " ######################### Search/Replacement #########################
 set ignorecase "大文字小文字関係なく検索する"
 set smartcase "検索文字列に大文字が含まれている場合は区別して検索"
@@ -72,8 +54,6 @@ set viminfo= "viminfoファイルに保存しない"
 set t_Co=256
 set fencs=iso-2022-jp,enc-jp,cp932
 filetype plugin indent on "ファイルタイプの検索とプラグインをONにする"
-set encoding=utf-8
-set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
 set fileformats=unix,dos,mac
 " set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
 set guifont=DroidSansMono\ Nerd\ Font\ 13
