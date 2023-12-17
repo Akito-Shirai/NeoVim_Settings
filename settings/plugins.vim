@@ -2,54 +2,43 @@
 "	Plugin
 "////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+"Setting config_dir, plug_file
+let s:config_dir = expand('~/.config/nvim/')
+let s:plug_dir = s:config_dir . '/autoload/'
+let s:plug_file = s:plug_dir . 'plug.vim'
+
 "Manager
 augroup my-coc-autocmds
   autocmd!
   autocmd VimEnter * silent! CocStart
 augroup END
 
-if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    \ >/dev/null 2>&1
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+"Check plug.vim
+if empty(glob(s:plug_file))
+    execute '!curl -fLo ' . s:plug_file . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 "Auto Install
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 
+
+execute 'set runtimepath^=' . s:config_dir
+
+let g:defers = []
+
 "Loading Plugin
-call plug#begin('~/.config/nvim/plugged')
-    "//Coc
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    "//Treesitter
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    "//ColorScheme
-    Plug 'joshdick/onedark.vim'
-    Plug 'EdenEast/nightfox.nvim'
-    "//Airline
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    "//Change ScreenSize
-    Plug 'simeji/winresizer'
-    "//Terminal
-    Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
-    "//Other
-    Plug 'tpope/vim-commentary'
-    Plug 'preservim/nerdtree'
-    Plug 'ryanoasis/vim-devicons'
-    Plug 'sain/gruvbox-material'
-    Plug 'sainnhe/gruvbox-material'
-    Plug 'Yggdroot/indentLine'
-    Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-    Plug 'jiangmiao/auto-pairs'
-    Plug 'tyru/caw.vim'
-    Plug 'mbbill/undotree'
-    " Plug 'OmniSharp/omnisharp-vim'
-    " Plug 'dense-analysis/ale'
+call plug#begin(s:plug_dir)
+    source ~/.config/nvim/settings/common_plugins.vim
+    if !exists('g:vscode')
+        source ~/.config/nvim/settings/cli_plugins.vim
+    endif
 call plug#end()
 
+for defer in defers
+    execute defer
+endfor
 
 "////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 "	Plugins Setting
