@@ -21,6 +21,10 @@ set encoding=utf-8
 set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8,cp932
 " set fenc=utf-8
 " set enc=utf-8
+" 非表示文字を表示する
+set listchars=tab:>-,trail:~,extends:>,precedes:<,nbsp:+
+set list
+
 
 "autocmd
 autocmd quickfixcmdpost *grep* cwindow

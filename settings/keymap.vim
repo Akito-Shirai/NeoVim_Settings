@@ -83,8 +83,6 @@ let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none
 "コメントアウト
 nmap <C-K> <Plug>(caw:hatpos:toggle)
 vmap <C-K> <Plug>(caw:hatpos:toggle)
-" 下部に高さ10のコマンドラインを生成
-nnoremap s; :<c-u>sp<cr><c-w>J:<c-u>res 20<cr>:<C-u>terminal<cr>:<c-u>setlocal noequalalways<cr>i
 
 
 "///vs////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

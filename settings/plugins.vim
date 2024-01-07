@@ -132,7 +132,13 @@ let g:airline_symbols.linenr = ''
 
 
 "########## ToggleTerm ##########
-lua require("toggleterm").setup()
+lua <<EOF
+require'toggleterm'.setup{
+    open_mapping = [[<c-\>]],
+    direction = 'float',
+}
+EOF
+
 
 "########## IndentLine Setting (yggdroot/indentLine) ##########
 " let g:indentLine_setColors = 0
